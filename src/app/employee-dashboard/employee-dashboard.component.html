@@ -1,0 +1,199 @@
+<nav class="navbar navbar-light bg-primary">
+  <div class="container-fluid">
+    <h1 class="main-text"><i class="fas fa-users"></i> Customer Manager</h1>
+  </div>
+</nav>
+<div class="d-flex customers-main">
+  <h1>&nbsp;&nbsp;<i class="fas fa-user"></i> Customers</h1>
+</div>
+<div class="d-flex filter-main">
+  <div class="d-flex--sub-1 filter-main-1">
+    <h3>Filter:</h3>
+    <input
+      type="text"
+      formControlName="firstName"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+      placeholder="Search 🔎"
+    />
+  </div>
+  <div class="d-flex--sub-2 filter-main-2">
+    <button
+      (click)="clickAddEmployee()"
+      type="button"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      class="btn btn-success btn-add-new"
+    >
+      Add New Customer
+    </button>
+  </div>
+</div>
+
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Email</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of employeeData">
+      <td>{{ row.firstName }}</td>
+      <td>{{ row.lastName }}</td>
+      <td>{{ row.gender }}</td>
+      <td>{{ row.email }}</td>
+      <td>
+        <button
+          class="btn btn-info"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          (click)="onEdit(row)"
+        >
+          Edit
+        </button>
+        <button (click)="deleteEmployee(row)" class="btn btn-danger mx-3">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Customer Details</h5>
+        <button
+          type="button"
+          class="close close-x"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formValue">
+          <div class="form-group">
+            <label for="exampleInputEmail1">First Name</label>
+            <input
+              type="text"
+              formControlName="firstName"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Enter your First Name"
+            />
+            <span *ngIf="firstName!.untouched" class="text-danger"
+              >First Name is Required</span
+            >
+            <span
+              *ngIf="firstName!.invalid && firstName!.touched"
+              class="text-danger"
+              >First Name is not Valid</span
+            >
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Last Name</label>
+            <input
+              type="text"
+              formControlName="lastName"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Enter your Last Name"
+            />
+            <span *ngIf="lastName!.untouched" class="text-danger"
+              >Last Name is Required</span
+            >
+            <span
+              *ngIf="lastName!.invalid && lastName!.touched"
+              class="text-danger"
+              >Last Name is not Valid</span
+            >
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Gender</label>
+            <select
+              type="text"
+              formControlName="gender"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              name="gender"
+              value="gender"
+              placeholder="Please select from the below options"
+            >
+              <option value="M" selected="selected">Male</option>
+              <option value="F">Female</option>
+              <option value="T">Others</option>
+            </select>
+            <span *ngIf="gender!.untouched" class="text-danger"
+              >Gender is Required</span
+            >
+            <span *ngIf="gender!.invalid && gender!.touched" class="text-danger"
+              >Gender is not Valid</span
+            >
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email</label>
+            <input
+              type="email"
+              formControlName="email"
+              class="form-control"
+              aria-describedby="emailHelp"
+              placeholder="Enter your Email"
+              id="contactemail"
+              email
+            />
+            <span *ngIf="email!.untouched" class="text-danger"
+              >Email is Required</span
+            >
+            <span *ngIf="email!.invalid && email!.touched" class="text-danger"
+              >Email is not Valid</span
+            >
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          *ngIf="showAdd"
+          (click)="postEmployeeDetails()"
+          class="btn btn-primary"
+          [disabled]="formValue.invalid"
+        >
+          <!-- [disabled]="email!.untouched" -->
+          Add
+        </button>
+        <button
+          type="button"
+          *ngIf="showUpdate"
+          (click)="updateEmployeeDetails()"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

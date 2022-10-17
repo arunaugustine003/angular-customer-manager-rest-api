@@ -1,0 +1,53 @@
+.main-text {
+  color: aliceblue;
+  i {
+    color: white;
+    margin-right: 0px;
+  }
+}
+.customers-main {
+  margin: 15px 0px;
+}
+.filter-main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0px;
+  &-1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 20px;
+  }
+  &-2 {
+    margin-right: 70px;
+    .btn-add-new {
+      color: black;
+      background-color: white;
+      &:hover {
+        cursor: pointer;
+        color: white;
+        background-color: black;
+      }
+    }
+  }
+}
+input.ng-untouched {
+  border-left: 5px solid red;
+}
+input.ng-touched {
+  border-left: 5px solid green;
+}
+.form-control.ng-touched.ng-invalid {
+  border-left: 5px solid red;
+}
+.form-control.ng-touched.ng-valid {
+  border-left: 5px solid green;
+}
+.close-x {
+  background: transparent;
+  border-color: transparent;
+  font-size: 30px;
+}
